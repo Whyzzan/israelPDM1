@@ -1,0 +1,147 @@
+=====================================================================
+ MINHA ESTANTE - Cadastro de livros com login, CRUD e relatório
+ Disciplina: PDM - Aluno: Israel Lopes (3110)
+=====================================================================
+
+O QUE É
+  Site responsivo (feito primeiro para celular) com:
+   - Criar conta (cadastro de usuário) e Login / Sair
+   - CRUD de livros: Cadastrar, Listar, Editar e Excluir
+   - Relatório: mostra os DADOS DO USUÁRIO CADASTRADO (nome, e-mail,
+     data do cadastro, meta) + indicadores dos livros (total, lidos,
+     páginas lidas, nota média, gráfico por gênero e lista completa)
+  Tecnologias: HTML + CSS + JavaScript no navegador, Node.js no servidor
+  e SQLite como banco de dados.
+
+SOBRE XAMPP / MYSQL
+  NÃO precisa de XAMPP nem de MySQL. O banco é o SQLite: um único arquivo
+  (data/estante.db) criado sozinho na primeira execução, com as tabelas
+  criadas automaticamente a partir de database/schema.sql.
+  Não existe senha de banco nem configuração de banco para fazer.
+
+---------------------------------------------------------------------
+ PASSO A PASSO (Windows)
+---------------------------------------------------------------------
+1) Instalar o Node.js (versão 22.13 ou mais nova)
+   - Baixe em https://nodejs.org (botão "LTS") e instale clicando em
+     "Next" até o fim.
+   - Confirme: abra o Prompt de Comando (tecla Windows, digite "cmd") e
+     rode:   node -v
+     Deve aparecer v22.13 ou maior (ex.: v22.x, v24.x).
+     Se aparecer versão menor, instale uma mais nova.
+
+2) Extrair o ZIP
+   - Clique com o botão direito no .zip > "Extrair tudo...".
+   - Fica uma pasta chamada "minha-estante".
+
+3) Iniciar o servidor
+   - Abra a pasta do projeto (a que contém o arquivo server.js).
+   - Clique na barra de endereço do Explorador de Arquivos (onde aparece
+     o caminho da pasta), apague o texto, digite  cmd  e aperte Enter.
+     (Isso abre o Prompt de Comando já dentro da pasta certa.)
+   - No Prompt de Comando digite e aperte Enter:
+         node server.js
+   - Deve aparecer:  Minha Estante rodando em http://localhost:3000
+     (o aviso "ExperimentalWarning: SQLite" é normal, pode ignorar.)
+   - NÃO feche essa janela enquanto estiver usando o site.
+     Para parar o servidor: Ctrl + C.
+
+4) Abrir no navegador
+   Acesse:  http://localhost:3000
+   (NAO abra os arquivos .html direto da pasta: sem o servidor rodando
+   a pagina fica sem CSS e nada funciona.)
+
+5) Não é preciso rodar "npm install": o projeto não usa bibliotecas
+   externas.
+
+Linux / Mac: no terminal, dentro da pasta, rode  node server.js
+
+---------------------------------------------------------------------
+ TESTAR NO CELULAR (mesma rede Wi-Fi do computador)
+---------------------------------------------------------------------
+ 1) No Prompt de Comando do PC rode  ipconfig  e anote o "Endereço IPv4"
+    (ex.: 192.168.0.15).
+ 2) No celular abra  http://192.168.0.15:3000
+ 3) Se não abrir, libere o Node.js no Firewall do Windows (pop-up
+    "Permitir acesso") e confirme que os dois estão na mesma rede.
+
+---------------------------------------------------------------------
+ COMO TESTAR CADA FUNÇÃO
+---------------------------------------------------------------------
+ Cadastro de usuário : "Criar conta" > nome, e-mail, senha (mín. 6),
+                       confirmar senha, meta de livros > Cadastrar.
+                       Você entra logado e vai direto para o RELATÓRIO,
+                       que mostra os dados que acabou de cadastrar.
+ Login / Sair        : botão "Sair" no menu; depois "Entrar" com o
+                       mesmo e-mail e senha. Crie uma 2ª conta: ela não
+                       vê os livros da primeira.
+ Create (cadastrar)  : menu "Livros" > preencha o formulário > "Salvar
+                       livro". Campos vazios mostram mensagem de erro.
+ Read (listar)       : os livros aparecem em cartões logo abaixo; use o
+                       filtro por status (Quero ler / Lendo / Lido).
+ Update (editar)     : "Editar" no cartão > altere > "Salvar alterações".
+ Delete (excluir)    : "Excluir" no cartão > confirmar.
+ Relatório           : menu "Relatório". Os números mudam na hora
+                       conforme você cadastra, edita ou exclui livros.
+                       Botão "Imprimir / Salvar PDF" gera o PDF.
+ Responsividade      : no Chrome/Edge aperte F12 > Ctrl+Shift+M e teste
+                       320, 375, 425, 768 e 1440 px.
+ Dados no banco      : recarregue a página (F5): os dados continuam,
+                       pois ficam em data/estante.db.
+
+---------------------------------------------------------------------
+ COMO O RELATÓRIO É GERADO
+---------------------------------------------------------------------
+ A página Relatório chama  GET /api/relatorio  (arquivo src/api.js),
+ que consulta o banco no momento do acesso:
+   - dados do usuário logado (tabela usuarios)
+   - totais por status, soma das páginas lidas e nota média
+     (SELECT com COUNT / SUM / AVG na tabela livros)
+   - quantidade de livros por gênero (GROUP BY)
+   - lista de todos os livros do usuário
+
+---------------------------------------------------------------------
+ SEGURANÇA (resumo)
+---------------------------------------------------------------------
+ - Senha da conta guardada como hash scrypt com salt (nunca em texto).
+ - Login por cookie HttpOnly; páginas internas e API exigem login.
+ - Cada usuário só acessa os próprios livros (filtro por usuario_id).
+ - Consultas SQL com parâmetros (sem SQL injection); textos exibidos
+   com textContent (sem injeção de HTML).
+ - Limite de 10 tentativas de login erradas por 15 minutos por IP.
+
+---------------------------------------------------------------------
+ ARQUIVOS
+---------------------------------------------------------------------
+ server.js               servidor: entrega as páginas e encaminha /api
+ src/api.js              rotas da API (conta, CRUD de livros, relatório)
+ src/auth.js             hash de senha e sessões
+ src/db.js               conexão SQLite e criação das tabelas
+ database/schema.sql     definição das 3 tabelas (usuarios, sessoes, livros)
+ public/login.html, registro.html, livros.html, relatorio.html
+ public/js/              lógica de cada página
+ public/css/style.css    estilo mobile-first (responsivo)
+ public/manifest.json    permite "Adicionar à tela inicial" no celular
+
+---------------------------------------------------------------------
+ OPCIONAL: HOSPEDAR ONLINE / GERAR APK
+---------------------------------------------------------------------
+ Hospedagem: serviços como Render ou Railway rodam Node.js (comando de
+ início: node server.js; versão do Node 22.13+). Em plano gratuito o
+ arquivo do banco pode ser apagado a cada reinício.
+ Com o site online em HTTPS, dá para gerar um APK pelo site
+ https://www.pwabuilder.com informando a URL.
+ No celular também é possível abrir o site e usar "Adicionar à tela
+ inicial".
+
+---------------------------------------------------------------------
+ PROBLEMAS COMUNS
+---------------------------------------------------------------------
+ "node não é reconhecido..."   Node.js não instalado (passo 1) ou
+                               reabra o Prompt depois de instalar.
+ "Cannot find module node:sqlite"  Node antigo; atualize para 22.13+.
+ "EADDRINUSE" / porta em uso   Feche o outro programa ou use outra
+                               porta:  set PORT=3001  e depois
+                               node server.js  (acesse :3001).
+ Esqueci a senha da conta      Não há recuperação; crie outra conta
+                               ou apague data/estante.db (zera tudo).

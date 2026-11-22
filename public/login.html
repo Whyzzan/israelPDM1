@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2f4b7c">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Entrar · Minha Estante</title>
+  </head>
+  <body>
+    <main class="entrada">
+      <div class="marca">📚</div>
+      <h1 style="text-align: center">Minha Estante</h1>
+      <form id="formLogin" class="card" novalidate>
+        <h2>Entrar</h2>
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="email" required>
+
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" autocomplete="current-password" required>
+
+        <div id="aviso" class="aviso" hidden role="alert"></div>
+
+        <div class="acoes">
+          <button class="btn" type="submit">Entrar</button>
+        </div>
+        <p class="rodape-form">
+          Ainda não tem conta? <a href="/registro.html">Criar conta</a>
+        </p>
+      </form>
+    </main>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "minha-estante",
+  "version": "1.0.0",
+  "description": "CRUD de livros com login e relatório (Node.js + SQLite, sem dependências)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=22.13" },
+  "license": "MIT"
+}

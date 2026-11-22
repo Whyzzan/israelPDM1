@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2f4b7c">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Relatório · Minha Estante</title>
+  </head>
+  <body>
+    <main>
+      <h1>Relatório do leitor</h1>
+
+      <section class="card">
+        <h2>Dados do usuário cadastrado</h2>
+        <dl class="dados" id="dadosUsuario"></dl>
+      </section>
+
+      <section class="card">
+        <h2>Meta de leitura</h2>
+        <p id="textoMeta"></p>
+        <div class="barra"><i id="barraMeta" style="width: 0"></i></div>
+      </section>
+
+      <section class="numeros" id="numeros" style="margin-bottom: 1rem"></section>
+
+      <section class="card">
+        <h2>Livros por gênero</h2>
+        <div id="generos"></div>
+      </section>
+
+      <section class="card">
+        <h2>Todos os livros</h2>
+        <div id="livros"></div>
+      </section>
+
+      <div class="acoes nao-imprimir">
+        <button class="btn sec" id="imprimir" type="button">Imprimir / Salvar PDF</button>
+      </div>
+      <div id="aviso" class="aviso" hidden role="alert"></div>
+    </main>
+    <script src="/js/common.js"></script>
+    <script src="/js/relatorio.js"></script>
+  </body>
+</html>

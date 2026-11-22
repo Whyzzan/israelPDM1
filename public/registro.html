@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2f4b7c">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Criar conta · Minha Estante</title>
+  </head>
+  <body>
+    <main class="entrada">
+      <div class="marca">📚</div>
+      <h1 style="text-align: center">Minha Estante</h1>
+      <form id="formRegistro" class="card" novalidate>
+        <h2>Criar conta</h2>
+
+        <label for="nome">Nome</label>
+        <input id="nome" maxlength="100" autocomplete="name" required>
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email" maxlength="150" autocomplete="email" required>
+
+        <div class="linha">
+          <div>
+            <label for="senha">Senha (mín. 6)</label>
+            <input id="senha" type="password" autocomplete="new-password" required>
+          </div>
+          <div>
+            <label for="senha2">Confirmar senha</label>
+            <input id="senha2" type="password" autocomplete="new-password" required>
+          </div>
+        </div>
+
+        <label for="meta">Meta de livros a ler</label>
+        <input id="meta" type="number" inputmode="numeric" min="1" max="365" value="12" required>
+
+        <div id="aviso" class="aviso" hidden role="alert"></div>
+
+        <div class="acoes">
+          <button class="btn" type="submit">Cadastrar</button>
+        </div>
+        <p class="rodape-form">
+          Já tem conta? <a href="/login.html">Entrar</a>
+        </p>
+      </form>
+    </main>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2f4b7c">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Meus livros · Minha Estante</title>
+  </head>
+  <body>
+    <main>
+      <form id="formLivro" class="card" novalidate>
+        <h2 id="tituloForm">Cadastrar livro</h2>
+        <input type="hidden" id="id">
+
+        <label for="titulo">Título</label>
+        <input id="titulo" maxlength="150" required>
+
+        <label for="autor">Autor</label>
+        <input id="autor" maxlength="100" required>
+
+        <div class="linha">
+          <div>
+            <label for="genero">Gênero</label>
+            <select id="genero"></select>
+          </div>
+          <div>
+            <label for="paginas">Páginas</label>
+            <input id="paginas" type="number" inputmode="numeric" min="1" max="10000" required>
+          </div>
+          <div>
+            <label for="status">Status</label>
+            <select id="status">
+              <option value="quero_ler">Quero ler</option>
+              <option value="lendo">Lendo</option>
+              <option value="lido">Lido</option>
+            </select>
+          </div>
+          <div>
+            <label for="nota">Nota (só se lido)</label>
+            <select id="nota" disabled>
+              <option value="">Sem nota</option>
+              <option value="1">1 ★</option>
+              <option value="2">2 ★</option>
+              <option value="3">3 ★</option>
+              <option value="4">4 ★</option>
+              <option value="5">5 ★</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="aviso" class="aviso" hidden role="alert"></div>
+
+        <div class="acoes">
+          <button class="btn" type="submit" id="salvar">Salvar livro</button>
+          <button class="btn sec" type="button" id="cancelar" hidden>Cancelar edição</button>
+        </div>
+      </form>
+
+      <h1>Meus livros</h1>
+      <label for="filtro">Filtrar por status</label>
+      <select id="filtro" style="margin-bottom: 0.8rem">
+        <option value="">Todos</option>
+        <option value="quero_ler">Quero ler</option>
+        <option value="lendo">Lendo</option>
+        <option value="lido">Lido</option>
+      </select>
+      <section id="lista" class="grade" aria-live="polite"></section>
+    </main>
+    <script src="/js/common.js"></script>
+    <script src="/js/livros.js"></script>
+  </body>
+</html>
